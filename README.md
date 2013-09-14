@@ -1,14 +1,13 @@
-# [toystori][1] - Share your toys
+# [sntd][1] - Something New To Do
 
-toystori - A website for all the lovely mothers and children
+[![Build Status](https://travis-ci.org/caulagi/sntd.png?branch=master)](https://travis-ci.org/caulagi/sntd)
 
-* Share your toys
-* Borrow interesting ones
-* Make new friends.
+sntd - Something New To Do - is a webapp to allow people
+to easily track what is happening in a city.  Anybody
+can create a listing for free, and it will have some
+social features like following by tags and people.
 
-* And best of all... **free to use**
-
-Built with love using Nodejs and Mongodb during Bangalore Hack
+Built with love using Nodejs and Mongodb.
 
 ## Dev setup
 
@@ -33,6 +32,6 @@ Built with love using Nodejs and Mongodb during Bangalore Hack
 
 Licensed under [MIT][1]
 
-[1]: https://github.com/caulagi/toystori/blob/master/LICENSE
-[2]: https://github.com/caulagi/toystori/blob/master/CREDITS
-[3]: http://toystori.com
+[1]: https://github.com/caulagi/sntd/blob/master/LICENSE
+[2]: https://github.com/caulagi/sntd/blob/master/CREDITS
+[3]: http://sntd.pw
