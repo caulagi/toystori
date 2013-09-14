@@ -1,13 +1,11 @@
 body {
   background: url('/static/img/bg.png') repeat;
-  font-family: 'Droid Sans', Helvetica, Verdana, Arial, sans-serif;
   font-family: 'Rokkitt', serif;
 }
 
 .navbar,
 .jumbotron .intro-title,
 .footer .copyright {
-  font-family: 'Lekton', sans-serif;
   font-family: 'Ubuntu', sans-serif;
 }
 
@@ -82,3 +80,7 @@ body {
 .blue { color: #6cc; }
 .green { color: #9c0; }
 .orange { color: #f90; }
+
+.align-center {
+  text-align: center;
+}
