@@ -1,13 +1,15 @@
 {
-  "name": "sntd",
-  "description": "Something New To Do - events In Your City",
+  "name": "",
+  "description": "Website for mothers and children to share toys",
   "keywords": [
-    "express",
-    "mongoose",
-    "mongodb",
-    "passport"
+    "children",
+    "mother",
+    "toys",
+    "sharing",
+    "social",
+    "local"
   ],
-  "homepage": "http://sntd.pw",
+  "homepage": "http://toystori.com",
   "version": "0.1.0",
   "private": false,
   "author": {
@@ -16,7 +18,7 @@
     "url": "http://caulagi.com"
   },
   "bugs": {
-    "url": "https://github.com/caulagi/sntd/issues"
+    "url": "https://github.com/caulagi/toystori/issues"
   },
   "engines": {
     "node": "0.10.x",
@@ -50,6 +52,6 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/caulagi/sntd.git"
+    "url": "https://github.com/caulagi/toystori.git"
   }
 }
