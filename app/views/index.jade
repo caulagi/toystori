@@ -14,3 +14,7 @@ block main
           strong Free to use!
       p
         a.btn.btn-primary(href="/toys/share") Share your toys
+
+block extra_js
+  script.
+      mixpanel.track('Landing page')
