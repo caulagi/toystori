@@ -10,8 +10,8 @@ var _base = {
     name: 'toystori: Share your toys'
   },
   facebook: {
-    clientID: "1406466249565794",
-    clientSecret: "a2f0757486db1fb8ec396bf16dd86d97",
+    clientID: "573379242699875",
+    clientSecret: "e1826c9857a0e58adb2a608ed516c1ad",
     callbackURL: "http://localhost:3000/auth/facebook/callback"
   },
   fallbackCity: 'Bangalore',
