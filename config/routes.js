@@ -52,7 +52,10 @@ module.exports = function (app, passport) {
   app.get('/privacy', function (req, res) {
     res.render('privacy')
   })
+  app.get('/contact', function (req, res) {
+    res.render('contact')
+  })
   app.get('/support', function (req, res) {
-    res.render('support')
+    res.redirect('/contact')
   })
 }
