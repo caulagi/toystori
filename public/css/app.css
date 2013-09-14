@@ -1,0 +1,84 @@
+body {
+  background: url('/static/img/bg.png') repeat;
+  font-family: 'Droid Sans', Helvetica, Verdana, Arial, sans-serif;
+  font-family: 'Rokkitt', serif;
+}
+
+.navbar,
+.jumbotron .intro-title,
+.footer .copyright {
+  font-family: 'Lekton', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.slant,
+.footer {
+  font-family: 'Quintessential', cursive;
+}
+
+.navbar {
+  border-radius: 0;
+  margin-bottom: 0;
+}
+
+.navbar .container {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.jumbotron .container a {
+  font-size: 1.1em;
+}
+
+.navbar-brand {
+  font-weight: bolder;
+  font-size: 2.4em;
+  padding: 0;
+}
+
+.branding {
+  float: left;
+}
+
+.navbar-subheading {
+  margin-left: 30px;
+  color: #f90;
+  font-weight: bolder;
+  letter-spacing: 2px;
+}
+
+.jumbotron {
+  color: black;
+  background-color: rgb(255,255,255);
+  background-color: rgba(255,255,255, 0.7);
+}
+
+@media screen and (min-width: 768px) {
+  .jumbotron h1 i {
+    font-size: 24px;
+  }
+}
+
+.footer .container {
+  font-weight: bold;
+  background: rgb(204, 221, 85);
+  background: rgb(204, 221, 85, 0.2);
+  background-color: #cd5;
+}
+
+.footer .copyright {
+  font-size: 1.3em;
+}
+
+.vspace-one { margin-top: 1em; }
+.vspace-two { margin-top: 2em; }
+.vspace-three { margin-top: 3em; }
+.vspace-four { margin-top: 4em; }
+.vspace-five { margin-top: 5em; }
+
+.align-right { text-align: right; }
+
+.red { color: #c33; }
+.blue { color: #6cc; }
+.green { color: #9c0; }
+.orange { color: #f90; }
