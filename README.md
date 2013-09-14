@@ -1,5 +1,7 @@
 # [toystori][1] - Share your toys
 
+[![Build Status](https://travis-ci.org/caulagi/toystori.png?branch=master)](https://travis-ci.org/caulagi/toystori)
+
 toystori - A website for all the lovely mothers and children
 
 * Share your toys
