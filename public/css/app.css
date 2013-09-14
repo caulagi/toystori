@@ -87,6 +87,11 @@ body {
   text-align: center;
 }
 
+#map-canvas {
+  height: 300px;
+  width: 100%;
+}
+
 
 
 

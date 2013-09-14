@@ -3,29 +3,33 @@ extends ../layouts/default
 block content
   .container.white-bg
     h2= toy.title
-    p !{toy.description}
-    .meta.muted
-      - if (toy.user)
-        - var name = toy.user.name ? toy.user.name : toy.user.username
-        p.no-margin
-          | Created by &nbsp;
-          a(href="/users/"+toy.user._id)= name
-          | &nbsp;on&nbsp;
-          = formatDate(toy.createdAt)
+    .visible-xs
+      p !{toy.description}
+    .hidden-xs
+      .meta.muted
+        - if (toy.user)
+          - var name = toy.user.name ? toy.user.name : toy.user.username
+          p.no-margin
+            | Created by &nbsp;
+            a(href="/users/"+toy.user._id)= name
+            | &nbsp;on&nbsp;
+            = formatDate(toy.createdAt)
+      hr
+      .col-sm-6.col-md-6.col-lg-6
+        p !{toy.description}
+        - if (allowEdit)
+          form.center.form-inline.confirm(action="/toys/"+toy.id, method="post")
+            input(type='hidden', name='_csrf', value="#{csrf_token}")
+            a.btn.btn-success(href='/toys/'+toy._id+'/edit', title="edit") Edit
+            &nbsp;&nbsp;
+            input(type="hidden", name="_method", value="DELETE")
+            button.btn.btn-danger(type="submit") delete
+      .col-sm-6.col-md-6.col-lg-6
+        p.text-danger
+          strong The toy is available at this location
+        #map-canvas
+      .vspace-four
 
-    - if (allowEdit)
-      p
-        br
-        form.center.form-inline.confirm(action="/toys/"+toy.id, method="post")
-          input(type='hidden', name='_csrf', value="#{csrf_token}")
-          a.btn(href='/toys/'+toy._id+'/edit', title="edit") Edit
-          &nbsp;&nbsp;
-          input(type="hidden", name="_method", value="DELETE")
-          button.btn.btn-danger(type="submit") delete
-
-      #map-canvas.vspace-three
-    - else
-      #map-canvas
 
 block extra_js
   script.

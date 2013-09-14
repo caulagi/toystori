@@ -1,4 +1,5 @@
 function showMap(address) {
+  console.log(address)
   var pos, mapOptions, map, marker;
   pos = new google.maps.LatLng(address.latitude, address.longitude);
   mapOptions = {
@@ -10,15 +11,6 @@ function showMap(address) {
   marker = new google.maps.Marker({
     position: pos,
     map: map,
+    title: 'Toy listing'
   });
 }
-
-$(document).ready(function () {
-  $('#citySearch').typeahead({
-    source: function (query, process) {
-      return $.get('/cities/search/'+query, function(data) {
-        return process(data)
-      })
-    }
-  })
-});
