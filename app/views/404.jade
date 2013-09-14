@@ -1,15 +1,14 @@
 extends layouts/default
 
-block main
-  h1 Oops something went wrong
-  br
-  span 404
-
 block content
-  #error-message-box
-    #error-stack-trace
-      pre
-        code!= error
+  .jumbotron
+    h2 Oops! Can't seem to find that page
+    p.text-error
+      strong 404
+    #error-message-box
+      #error-stack-trace
+        pre
+          code!= error
 
 block extra_js
   script.

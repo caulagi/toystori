@@ -1,11 +1,10 @@
 extends layouts/default
 
-block main
-  h1 Oops something went wrong
-  br
-  span 500
-
 block content
+  .jumbotron
+    h2 Oops! Something went wrong
+    p.text-error
+      strong 500
   pre= error
 
 block extra_js
