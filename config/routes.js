@@ -32,7 +32,9 @@ module.exports = function (app, passport) {
 
 
   // --- HOME
-  //app.get('/', toys.index)
+  app.get('/', function (req, res) {
+    res.render('index')
+  })
 
   // city routes
   var cities = require('../app/controllers/cities')
