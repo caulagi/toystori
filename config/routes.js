@@ -10,7 +10,10 @@ var async = require('async')
  */
 
 var users = require('../app/controllers/users')
+  , toys = require('../app/controllers/toys')
   , auth = require('./middlewares/authorization')
+
+var toyAuth = [auth.requiresLogin, auth.toy.hasAuthorization]
 
 /**
  * Expose routes
@@ -30,11 +33,16 @@ module.exports = function (app, passport) {
 
   app.param('userId', users.user)
 
+  app.get('/', toys.index)
+  app.get('/toys/by-city/:cityId', toys.byCity)
+  app.get('/toys/new', auth.requiresLogin, toys.new)
+  app.post('/toys/new', auth.requiresLogin, toys.create)
+  app.get('/toys/:id', toys.show)
+  app.put('/toys/:id/attending', auth.requiresLogin, toys.attending)
+  app.put('/toys/:id', toyAuth, toys.update)
+  app.del('/toys/:id', toyAuth, toys.destroy)
 
-  // --- HOME
-  app.get('/', function (req, res) {
-    res.render('index')
-  })
+  app.param('id', toys.load)
 
   // city routes
   var cities = require('../app/controllers/cities')

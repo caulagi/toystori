@@ -1,6 +1,7 @@
 body {
   background: url('/static/img/bg.png') repeat;
   font-family: 'Rokkitt', serif;
+  letter-spacing: 1px;
 }
 
 .navbar,
@@ -45,7 +46,8 @@ body {
   letter-spacing: 2px;
 }
 
-.jumbotron {
+.jumbotron,
+.white-bg {
   color: black;
   background-color: rgb(255,255,255);
   background-color: rgba(255,255,255, 0.7);

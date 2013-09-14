@@ -16,7 +16,8 @@ var _base = {
   },
   fallbackCity: 'Bangalore',
   fallbackCityId: '51fe014e1f004ba72300522c',
-  MIXPANEL_ID: process.env.MIXPANEL_ID || "86d6a0a2e95c442691e4dc5543dbc833"
+  MIXPANEL_ID: process.env.MIXPANEL_ID || "86d6a0a2e95c442691e4dc5543dbc833",
+  reverse_geocode: "http://maps.googleapis.com/maps/api/geocode/json?sensor=false&latlng=%s,%s"
 }
 
 var development = _.extend({}, _base, { db: _base.db+'_dev' })

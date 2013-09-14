@@ -36,6 +36,7 @@
     "connect-flash": "latest",
     "passport": "latest",
     "passport-facebook": "latest",
+    "imager": "latest",
     "underscore": "latest",
     "view-helpers": "latest",
     "async": "latest",

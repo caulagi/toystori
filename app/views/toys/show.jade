@@ -1,0 +1,37 @@
+extends ../layouts/default
+
+block content
+  .container.white-bg
+    h2= toy.title
+    p !{toy.description}
+    .meta.muted
+      - if (toy.user)
+        - var name = toy.user.name ? toy.user.name : toy.user.username
+        p.no-margin
+          | Created by &nbsp;
+          a(href="/users/"+toy.user._id)= name
+          | &nbsp;on&nbsp;
+          = formatDate(toy.createdAt)
+
+    - if (allowEdit)
+      p
+        br
+        form.center.form-inline.confirm(action="/toys/"+toy.id, method="post")
+          input(type='hidden', name='_csrf', value="#{csrf_token}")
+          a.btn(href='/toys/'+toy._id+'/edit', title="edit") Edit
+          &nbsp;&nbsp;
+          input(type="hidden", name="_method", value="DELETE")
+          button.btn.btn-danger(type="submit") delete
+
+      #map-canvas.vspace-three
+    - else
+      #map-canvas
+
+block extra_js
+  script.
+    mixpanel.track('Show toy listing page')
+    var address = {
+      latitude: #{toy.latitude},
+      longitude: #{toy.longitude},
+    }
+    showMap(address)

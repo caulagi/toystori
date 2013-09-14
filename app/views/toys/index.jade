@@ -1,0 +1,34 @@
+extends ../layouts/default
+
+block content
+  include ../includes/marketing
+
+  -if (req.city)
+    -var city = req.city
+    .city
+      .pull-right Showing upcoming events in #{city.name},
+        | #{city.state}, #{city.country.name}
+  h1= title
+  - if (meetups.length)
+    .row-fluid
+      .span9
+        - each meetup, index in meetups
+          include ./meetup
+
+        - if (pages > 1)
+          .pagination
+            ul
+              != createPagination(pages, page)
+
+      .span2.offset1
+        include ./browse
+
+  - else
+    p.muted No events in your city yet.&nbsp;
+      a(href="/meetups/new") Create one
+    p Or see listing for &nbsp;
+      a(href="/meetups/by-city/#{fallbackCityId}") Bangalore
+
+block extra_js
+  script.
+    mixpanel.track('Event listing (index) page')
