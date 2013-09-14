@@ -1,27 +1,30 @@
-.row-fluid#footer
+.footer
   .container
-    .span10.offset1
-      .row-fluid.vspace-four
-        hr
-      .row-fluid
-        .pull-right
-          ul.nav.nav-list
-            li
-              a(href='/meetups/new')
-                i.icon-plus-sign
-                | Create new event
-            li
-              a(href='/feedback')
-                i.icon-comment
-                | Feedback - tell us what you think
-            li
-              a(href='/about')
-                i.icon-info-sign
-                | About
-            li
-              a(href='/support')
-                i.icon-envelope
-                | Contact
-        p
-          | &copy; 2013 &nbsp;
-          a(href='http://caulagi.com') Pradip P Caulagi.
+    hr
+    .hidden-xs
+      span.copyright &copy;
+      | 2013 &nbsp;
+      a(href="http://caulagi.com", target="_blank") Pradip P Caulagi
+      ol.pull-right.breadcrumb
+        li
+          a(href="/about") About
+        li
+          a(href="/contact") Contact
+        li
+          a(href="/terms") Terms
+        li
+          a(href="/privacy") Privacy
+     .visible-xs
+      .align-right container
+        span.copyright &copy;
+        | 2013 &nbsp;
+        a(href="http://caulagi.com", target="_blank") Pradip P Caulagi
+        ol.align-right.breadcrumb.vspace-one
+          li
+            a(href="/about") About
+          li
+            a(href="/contact") Contact
+          li
+            a(href="/terms") Terms
+          li
+            a(href="/privacy") Privacy
