@@ -81,6 +81,7 @@ ToySchema.methods = {
     var imager = new Imager(imagerConfig, 'S3')
     var self = this
 
+    console.log('imager upload')
     imager.upload(images, function (err, cdnUri, files) {
       if (err) return cb(err)
       if (files.length) {

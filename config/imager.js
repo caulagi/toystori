@@ -21,7 +21,7 @@ module.exports = {
       key: process.env.AWS_S3_KEY,
       secret: process.env.AWS_S3_SECRET,
       bucket: 'node-s3-test',
-      region: 'us-east-1'
+      region: 'website-ap-southeast-1'
     }
   },
 

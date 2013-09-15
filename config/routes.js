@@ -33,9 +33,7 @@ module.exports = function (app, passport) {
 
   app.param('userId', users.user)
 
-  app.get('/', function(req, res) {
-    res.render('index')
-  })
+  app.get('/', toys.index)
   app.get('/toys/by-city/:cityId', toys.byCity)
   app.get('/toys/new', auth.requiresLogin, toys.new)
   app.post('/toys/new', auth.requiresLogin, toys.create)

@@ -48,34 +48,15 @@ exports.load = function(req, res, next, id){
  */
 
 exports.index = function(req, res){
-
-  var ip = getClientIp(req)
-    , url = util.format("http://freegeoip.net/json/%s", ip)
-
-  request(url, function(err, response, body) {
-    if (err || response.statusCode != 200) {
-      return res.redirect(util.format('/toys/by-city/%s', config.fallbackCityId))
+  Toy.list({}, function(err, toys) {
+    if (err) {
+      return res.render('404')
     }
 
-    var freegeo = JSON.parse(body)
-      , city = freegeo.city || config.fallbackCity
-      , fp = City.getFingerprint(city)
-      , options = { criteria: { fingerprint: fp } }
-
-
-    //TODO: Handle the case where lookup by fingerprint fails
-    City.list(options, function(err, cities) {
-      if (err) {
-        console.log('Failed to lookup city with fp:', fp)
-        return res.render('404')
-      }
-
-      City.count().exec(function (err, count) {
-        var cityId = config.fallbackCityId
-        if (cities.length > 0) {
-          cityId = cities[0].id
-        }
-        return res.redirect(util.format('/toys/by-city/%s', cityId))
+    Toy.count().exec(function (err, count) {
+      res.render('toys/index', {
+        title: 'Toys near you',
+        toys: toys,
       })
     })
   })
@@ -167,7 +148,7 @@ exports.create = function (req, res, next) {
         req.body.city = cities[0].id
         var toy = new Toy(req.body)
         toy.user = req.user
-        toy.uploadAndSave([req.files.image], function (err, doc, count) {
+        toy.uploadAndSave(req.files.image, function (err, doc, count) {
           if (!err) {
             req.flash('success', 'Successfully created toy!')
             return res.redirect('/toys/'+doc._id)

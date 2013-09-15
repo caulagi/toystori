@@ -5,6 +5,8 @@ block content
     h2= toy.title
     .visible-xs
       p !{toy.description}
+      p.vspace-two
+        a.btn.btn-primary(href="/toys/#{toy.id}/interested") I'm interested
     .hidden-xs
       .meta.muted
         - if (toy.user)
@@ -17,6 +19,8 @@ block content
       hr
       .col-sm-6.col-md-6.col-lg-6
         p !{toy.description}
+        p.vspace-two
+          a.btn.btn-primary.disabled(href="/toys/#{toy.id}/interested") I'm interested
         - if (allowEdit)
           form.center.form-inline.confirm(action="/toys/"+toy.id, method="post")
             input(type='hidden', name='_csrf', value="#{csrf_token}")
@@ -29,7 +33,6 @@ block content
           strong The toy is available at this location
         #map-canvas
       .vspace-four
-
 
 block extra_js
   script.

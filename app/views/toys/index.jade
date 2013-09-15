@@ -1,34 +1,33 @@
 extends ../layouts/default
 
-block content
-  include ../includes/marketing
+block main
+  .jumbotron
+    .container
+      h1.intro-title
+        i.glyphicon.glyphicon-share
+        | &nbsp;Share your toys!
+      p.vspace-one
+        | A website for all the lovely mothers and children -          
+        | Share your toys.  Borrow interesting ones.  Make new friends.
+        | And best of all...
+        span.red.slant
+          strong Free to use!
+      p
+        a.btn.btn-primary(href="/toys/new") Share your toys
 
-  -if (req.city)
-    -var city = req.city
-    .city
-      .pull-right Showing upcoming events in #{city.name},
-        | #{city.state}, #{city.country.name}
-  h1= title
-  - if (meetups.length)
-    .row-fluid
-      .span9
-        - each meetup, index in meetups
-          include ./meetup
-
-        - if (pages > 1)
-          .pagination
-            ul
-              != createPagination(pages, page)
-
-      .span2.offset1
-        include ./browse
-
-  - else
-    p.muted No events in your city yet.&nbsp;
-      a(href="/meetups/new") Create one
-    p Or see listing for &nbsp;
-      a(href="/meetups/by-city/#{fallbackCityId}") Bangalore
+  .visible-md.visible-lg.hidden-xs.hidden-sm
+    .container
+      -for toy in toys
+        .col-md-4.col-lg-4
+          .thumbnail
+            img(src="#{toy.image.cdnUri}", alt="Toy image")
+            .caption
+              h3
+                a(href="/toys/#{toy.id}")= toy.title
+              p= toy.description
+              p.text-success
+                strong Suitable for 1-2 years, JP Nagar
 
 block extra_js
   script.
-    mixpanel.track('Event listing (index) page')
+      mixpanel.track('Landing page')

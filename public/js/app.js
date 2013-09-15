@@ -3,7 +3,7 @@ function showMap(address) {
   var pos, mapOptions, map, marker;
   pos = new google.maps.LatLng(address.latitude, address.longitude);
   mapOptions = {
-    zoom: 7,
+    zoom: 9,
     center: pos,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   }
