@@ -1,14 +1,11 @@
 module.exports = {
   variants: {
-    article: {
+    toy: {
       resize: {
         detail: "800x600"
       },
       crop: {
         thumb: "200x200"
-      },
-      resizeAndCrop: {
-        mini: {resize: "200x150", crop: "100x100"}
       }
     },
 
@@ -20,19 +17,11 @@ module.exports = {
   },
 
   storage: {
-    Rackspace: {
-      auth: {
-        username: "USERNAME",
-        apiKey: "API_KEY",
-        host: "lon.auth.api.rackspacecloud.com"
-      },
-      container: "CONTAINER_NAME"
-    },
     S3: {
-      key: 'API_KEY',
-      secret: 'SECRET',
-      bucket: 'BUCKET_NAME',
-      region: 'REGION'
+      key: process.env.AWS_S3_KEY,
+      secret: process.env.AWS_S3_SECRET,
+      bucket: 'node-s3-test',
+      region: 'us-east-1'
     }
   },
 

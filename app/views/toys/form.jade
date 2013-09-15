@@ -32,6 +32,12 @@ block content
               a(href="http://daringfireball.net/projects/markdown/", target="_blank") markdown.
 
         .form-group
+          label.control-label.col-lg-2(for='file') Image
+          .col-lg-6
+            input#file.form-control(type='file', name="image[]")
+            span.help-block Upload a photo of how it looks
+
+        .form-group
           label.control-label.col-lg-2(for='latitude') Latitude
           .col-lg-6
             input#title.form-control(type='text', name="latitude", value=toy.latitude)

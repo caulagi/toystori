@@ -88,7 +88,6 @@ exports.index = function(req, res){
 exports.byCity = function(req, res, next){
 
   var page = (req.param('page') > 0 ? req.param('page') : 1) - 1
-    , tags = []
     , options = { perPage: config.items_per_page, page: page }
 
   options.criteria = {city: req.city.id}
@@ -97,17 +96,10 @@ exports.byCity = function(req, res, next){
     Toy.count().exec(function (err, count) {
       _.each(toys, function(toy, index) {
         toy.description = markdown.toHTML(toy.description.slice(0,250)+'...')
-        _.each(toy.tags.split(','), function (tag, index) {
-          tag = tag.trim()
-          if (tag && !tags[tag]) {
-            tags.push(tag)
-          }
-        })
       })
       res.render('toys/index', {
         title: 'Upcoming events',
         toys: toys,
-        tags: _.first(tags, 20),
         page: page + 1,
         pages: Math.ceil(count / config.items_per_page),
         fallbackCityId: config.fallbackCityId
@@ -175,7 +167,7 @@ exports.create = function (req, res, next) {
         req.body.city = cities[0].id
         var toy = new Toy(req.body)
         toy.user = req.user
-        toy.save(function (err, doc, count) {
+        toy.uploadAndSave([req.files.image], function (err, doc, count) {
           if (!err) {
             req.flash('success', 'Successfully created toy!')
             return res.redirect('/toys/'+doc._id)
