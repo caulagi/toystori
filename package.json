@@ -22,7 +22,7 @@
   },
   "engines": {
     "node": "0.10.x",
-    "npm":  "1.2.x"
+    "npm": "1.2.x"
   },
   "scripts": {
     "start": "NODE_ENV=development ./node_modules/.bin/nodemon server.js",
@@ -42,13 +42,20 @@
     "async": "latest",
     "request": "latest",
     "markdown": "latest",
-    "forever": "latest"
+    "mean-logger": "latest",
+    "forever": "latest",
+    "grunt": "latest",
+    "grunt-cli": "latest",
+    "grunt-bower-task": "latest"
   },
   "devDependencies": {
     "supertest": "latest",
     "should": "latest",
-    "mocha": "latest",
-    "nodemon": "latest"
+    "grunt-contrib-watch": "latest",
+    "grunt-contrib-jshint": "latest",
+    "grunt-nodemon": "~0.1.1",
+    "grunt-concurrent": "latest",
+    "grunt-mocha-test": "latest"
   },
   "license": "MIT",
   "repository": {
