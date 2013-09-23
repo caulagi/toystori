@@ -1,16 +1,4 @@
-function showMap(address) {
-  console.log(address)
-  var pos, mapOptions, map, marker;
-  pos = new google.maps.LatLng(address.latitude, address.longitude);
-  mapOptions = {
-    zoom: 9,
-    center: pos,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  }
-  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-  marker = new google.maps.Marker({
-    position: pos,
-    map: map,
-    title: 'Toy listing'
-  });
-}
+window.app = angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', 'mean.system', 'mean.articles']);
+
+angular.module('mean.system', []);
+angular.module('mean.articles', []);

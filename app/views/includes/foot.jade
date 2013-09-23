@@ -1,18 +1,29 @@
-script(src='/static/js/jquery-2.0.3.min.js')
-script(src='/static/js/bootstrap.min.js')
-script(src='/static/js/bootstrap-datetimepicker.min.js')
-script(src='//maps.googleapis.com/maps/api/js?key=AIzaSyCxC77v0ZMmJmOPoGNccnO25kzb7iX_FYs&sensor=false')
-script(src='/static/js/app.js')
-script.
-  (function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===e.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.2.min.js';f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f);b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!== typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");for(g=0;g<i.length;g++)f(c,i[g]); b._i.push([a,e,d])};b.__SV=1.2}})(document,window.mixpanel||[]); mixpanel.init("#{MIXPANEL_ID}");
+script(type='text/javascript', src='lib/jquery/jquery.js')
 
-script.
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+//Bootstrap
+script(type='text/javascript', src='lib/bootstrap/js/bootstrap.js')
 
-  ga('create', 'UA-42951510-1', 'eiyc.pw');
-  ga('send', 'pageview');
+//AngularJS
+script(type='text/javascript', src='lib/angular/angular.js')
+script(type='text/javascript', src='lib/angular-cookies/angular-cookies.js')
+script(type='text/javascript', src='lib/angular-resource/angular-resource.js')
 
-block extra_js
+//Angular UI
+script(type='text/javascript', src='lib/angular-bootstrap/ui-bootstrap-tpls.js')
+script(type='text/javascript', src='lib/angular-ui-utils/modules/route.js')
+
+//Application Init
+script(type='text/javascript', src='js/app.js')
+script(type='text/javascript', src='js/config.js')
+script(type='text/javascript', src='js/directives.js')
+script(type='text/javascript', src='js/filters.js')
+
+//Application Services
+script(type='text/javascript', src='js/services/global.js')
+script(type='text/javascript', src='js/services/articles.js')
+
+//Application Controllers
+script(type='text/javascript', src='js/controllers/articles.js')
+script(type='text/javascript', src='js/controllers/index.js')
+script(type='text/javascript', src='js/controllers/header.js')	
+script(type='text/javascript', src='js/init.js')
