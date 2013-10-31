@@ -51,6 +51,7 @@
   "devDependencies": {
     "supertest": "latest",
     "should": "latest",
+    "mocha": "latest",
     "grunt-contrib-watch": "latest",
     "grunt-contrib-jshint": "latest",
     "grunt-nodemon": "~0.1.1",
