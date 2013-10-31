@@ -1,0 +1,28 @@
+.white-bg
+  - if (typeof info != 'undefined' && info.length)
+    .alert.alert-info
+      button.close(type='button', data-dismiss='alert') ×
+      ul
+        - each inf in info
+          li!= inf
+
+  - if (typeof errors != 'undefined' && errors.length)
+    .alert.alert-danger
+      button.close(type='button', data-dismiss='alert') ×
+      ul
+        - each error in errors
+          li!= error
+
+  - if (typeof success != 'undefined' && success.length)
+    .alert.alert-success
+      button.close(type='button', data-dismiss='alert') ×
+      ul
+        - each succ in success
+          li!= succ
+
+  - if (typeof warning != 'undefined' && warning.length)
+    .alert.alert-warning
+      button.close(type='button', data-dismiss='alert') ×
+      ul
+        - each warn in warning
+          li!= warn

@@ -1,0 +1,10 @@
+extends ../layouts/default
+
+block content
+  .jumbotron
+    #login.vspace-two.align-center
+      a.btn.btn-auth.btn-facebook.large(href="/auth/facebook") Login with Facebook
+
+block extra_js
+  script.
+    mixpanel.track('Login page')

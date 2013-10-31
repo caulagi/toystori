@@ -1,0 +1,10 @@
+extends ../layouts/default
+
+block content
+  .jumbotron.align-center
+    h2 #{user.name}
+    p.vspace-two We will be back with something interesting in a bit.
+
+block extra_js
+  script.
+    mixpanel.track('User profile page')

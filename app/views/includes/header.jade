@@ -1,0 +1,22 @@
+.navbar.navbar-inverse
+  .container
+    .branding
+      a(href="/", class="navbar-brand") toystori
+      span.navbar-subheading.slant.hidden-xs
+        | Share your toys
+    .pull-right
+      if (req.isAuthenticated())
+        .dropdown
+          a(data-toggle="dropdown", href="#").dropdown-toggle
+            img(src="https://graph.facebook.com/#{req.user.facebook.id}/picture", alt="Profile image")
+          ul(role="menu").dropdown-menu.pull-right
+            li
+              a(href="/toys/new") Share your toy
+            li.divider
+            li
+              a(href="/users/"+req.user.id, title="Profile") Profile
+            li.divider
+            li
+              a(href="/logout", title="logout") Logout
+      else
+        a.btn.btn-success(href="/login") Sign in

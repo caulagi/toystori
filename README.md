@@ -1,4 +1,4 @@
-# [toystori][2] - Share your toys
+# [toystori][1] - Share your toys
 
 [![Build Status](https://travis-ci.org/caulagi/toystori.png?branch=master)](https://travis-ci.org/caulagi/toystori)
 
@@ -16,18 +16,11 @@ Built with love using Nodejs and Mongodb during Bangalore Hack
 
 * Install mongodb
 
-* Install grunt
+* Load data about cities and countries
 
-        $ sudo npm install -g grunt-cli
+        $ node data/loadCities.js
 
-* Build client
-
-        $ cd client
-        $ npm install
-        $ grunt build
-        $ grunt watch
-
-* Run server
+* Install dependencies and start node
 
         $ npm install
         $ node_modules/.bin/nodemon server.js 
@@ -42,5 +35,6 @@ Built with love using Nodejs and Mongodb during Bangalore Hack
 
 Licensed under [MIT][1]
 
-[1]: https://github.com/caulagi/toystori/blob/master/LICENSE.mit
-[2]: http://toystori.com
+[1]: https://github.com/caulagi/toystori/blob/master/LICENSE
+[2]: https://github.com/caulagi/toystori/blob/master/CREDITS
+[3]: http://toystori.com
