@@ -1,6 +1,7 @@
 body {
   background: url('/static/img/bg.png') repeat;
   font-family: 'Rokkitt', serif;
+  font-size: 15px;
   letter-spacing: 1px;
 }
 
@@ -33,6 +34,7 @@ body {
   font-weight: bolder;
   font-size: 2.4em;
   padding: 0;
+  height: 26px;
 }
 
 .branding {
