@@ -1,20 +1,21 @@
 extends ../layouts/default
+include ../includes/mixins
 
 block main
   include ../includes/marketing
 
   .container
-    -for toy in toys
-      .col-md-4.col-xs-12.col-sm-6
-        .thumbnail
-          img(src="#{toy.image.cdnUri}", alt="Toy image")
-          .caption
-            h3
-              a(href="/toys/#{toy.id}")= toy.title
-            p !{toy.description}
-            p.text-success
-              | Age group: #{toy.agegroup}
+    - if (toys.length)
+      +renderToys(toys)
+    - else
+      .row.white-bg
+        .vspace-two
+        .align-center
+          strong There are no toys near you yet.
+            | Be the first to &nbsp;
+            a(href="/toys/new") share
+        .vspace-two
 
 block extra_js
   script.
-      mixpanel.track('Landing page')
+      mixpanel.track('Toy listing (index)')

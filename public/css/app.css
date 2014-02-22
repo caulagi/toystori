@@ -49,10 +49,15 @@ body {
 }
 
 .jumbotron,
-.white-bg {
+.white-bg,
+.listing {
   color: black;
   background-color: rgb(255,255,255);
   background-color: rgba(255,255,255, 0.7);
+}
+
+.listing {
+  padding: 20px;
 }
 
 @media screen and (min-width: 768px) {

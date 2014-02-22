@@ -1,0 +1,26 @@
+mixin renderOne(toy)
+  .col-md-4
+    .listing
+      h3
+        a(href="/toys/#{toy.id}")= toy.title
+      p
+        img.thumbnail.img-responsive(src="#{toy.image.cdnUri}/detail_#{toy.image.files[0]}")
+      p !{toy.description}
+      p.text-success
+        | Age group: #{toy.agegroup}
+
+mixin renderRow(first, second, third)
+  .row.vspace-two
+    +renderOne(first)
+    +renderOne(second)
+    +renderOne(third)
+
+mixin renderToys(toys)
+  - for (var i = 0; i <= toys.length-3; i=i+3)
+    +renderRow(toys[i], toys[i+1], toys[i+2])
+  - if (i < toys.length-1)
+    .row.vspace-two
+      +renderOne(toys[i-2])
+      +renderOne(toys[i-1])
+  - else
+      +renderOne(toys[i-1])
