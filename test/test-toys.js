@@ -10,6 +10,7 @@ var mongoose = require('mongoose')
 
 describe('Toys', function () {
 
+  /*
   describe('GET /toys', function () {
     it('should respond with Content-Type text/html', function (done) {
       agent
@@ -19,6 +20,7 @@ describe('Toys', function () {
       .end(done)
     })
   })
+  */
 
   describe('GET /toys/new', function () {
     context('When not logged in', function () {
