@@ -5,7 +5,6 @@ var rootPath = require('path').normalize(__dirname + '/..')
 var _base = {
   db: 'mongodb://localhost/toystori',
   root: rootPath,
-  items_per_page: 30,
   app: {
     name: 'toystori: Share your toys'
   },
@@ -19,10 +18,12 @@ var _base = {
     secretAccessKey: process.env.AWS_S3_SECRET,
     region: 'us-east-1'
   },
-  fallbackCity: 'Bangalore',
-  fallbackCityId: '51fe014e1f004ba72300522c',
-  MIXPANEL_ID: process.env.MIXPANEL_ID || "86d6a0a2e95c442691e4dc5543dbc833",
-  reverse_geocode: "http://maps.googleapis.com/maps/api/geocode/json?sensor=false&latlng=%s,%s"
+  fallbackLatitude: 12.972558,
+  fallbackLongitude: 77.594911,
+  fallbackCity: "Bangalore",
+  NEARBY_RADIUS: 40, // distance in kms
+  RESULTS_PER_PAGE: 20,
+  MIXPANEL_ID: process.env.MIXPANEL_ID || "86d6a0a2e95c442691e4dc5543dbc833"
 }
 
 var development = _.extend({}, _base, { db: _base.db+'_dev' })

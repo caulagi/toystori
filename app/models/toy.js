@@ -110,6 +110,14 @@ ToySchema.statics = {
       .limit(options.perPage)
       .skip(options.perPage * options.page)
       .exec(cb)
+  },
+
+  searchOptions: function() {
+    return options = {
+      maxDistance: radToKilometers(config.NEARBY_RADIUS),
+      spherical: true,
+      limit: config.RESULTS_PER_PAGE
+    }
   }
 }
 

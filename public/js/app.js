@@ -15,25 +15,4 @@ function showMap(address) {
 }
 
 $(document).ready(function () {
-  $('#interested').submit(function(e) {
-    var id = $(this.meetup_id).val()
-      , csrf = $(this._csrf).val()
-    e.preventDefault();
-
-    $.ajax({
-      url: '/toys/'+id+'/borrow',
-      type: 'PUT',
-      data: {_csrf: csrf},
-      dataType: "json",
-      success: function(result) {
-        var node = $('#feedback-box')
-        node.removeClass('hide')
-        if (result.status === 'ok') {
-          node.html("Updated Facebook successfully").addClass('alert-success')
-        } else {
-          node.html(result.message.message).addClass('alert-danger')
-        }
-      }
-    })
-  })
 });

@@ -12,7 +12,7 @@ block main
             .caption
               h3
                 a(href="/toys/#{toy.id}")= toy.title
-              p= toy.description
+              p !{toy.description}
               p.text-success
                 | Age group: #{toy.agegroup}
 

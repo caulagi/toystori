@@ -7,10 +7,7 @@ var mongoose = require('mongoose')
   , env = process.env.NODE_ENV || 'development'
   , config = require('../../config/config')[env]
   , Toy = mongoose.model('Toy')
-  , async = require('async')
-  , util = require('util')
   , errors = require('../../lib/errors')
-  , request = require('request')
   , markdown = require( "markdown" ).markdown
   , _ = require('underscore')
 
@@ -23,49 +20,48 @@ exports.load = function(req, res, next, id){
   })
 }
 
-/**
- * List
- */
-
-exports.index = function(req, res){
-  Toy.list({}, function(err, toys) {
-    if (err) {
-      return res.render('404')
-    }
-
-    Toy.count().exec(function (err, count) {
-      res.render('toys/index', {
-        title: 'Toys near you',
-        toys: toys,
-      })
-    })
+exports.index = function(req, res) {
+  return res.render("toys/landing", {
+    title: 'Toys near you',
   })
 }
 
-/**
- * List by city
- */
+exports.renderToys= function(req, res, results) {
+  var toys = []
 
-exports.byCity = function(req, res, next){
+  _.each(results, function(result, index) {
+    toy = result.obj;
+    toy.distance = result.dis
+    toys.push(toy)
+  })
 
-  var page = (req.param('page') > 0 ? req.param('page') : 1) - 1
-    , options = { perPage: config.items_per_page, page: page }
+  _.each(toys, function(toy, index) {
+    toy.description = markdown.toHTML(toy.description.slice(0,250)+'...')
+  })
 
-  options.criteria = {city: req.city.id}
-  Toy.list(options, function(err, toys) {
-    if (err) return next(err)
-    Toy.count().exec(function (err, count) {
-      _.each(toys, function(toy, index) {
-        toy.description = markdown.toHTML(toy.description.slice(0,250)+'...')
-      })
-      res.render('toys/index', {
-        title: 'Upcoming events',
-        toys: toys,
-        page: page + 1,
-        pages: Math.ceil(count / config.items_per_page),
-        fallbackCityId: config.fallbackCityId
-      })
-    })
+  return res.render('toys/index', {
+    title: 'Events around you',
+    toys: toys,
+    coords: req.session['loc'].coordinates
+  })
+}
+
+exports.byLocation = function(req, res, next){
+
+  var coords = { type: 'Point', coordinates: [
+    parseFloat(req.query.lon), parseFloat(req.query.lat)
+  ]}
+  req.session['loc'] = coords
+  console.log(coords)
+
+  var options = Toy.searchOptions()
+  Toy.geoNear(coords, options, function(err, results, stats) {
+    if (err) {
+      console.log(err)
+      return res.render('toys/empty')
+    }
+
+    return module.exports.renderToys(req, res, results)
   })
 }
 
