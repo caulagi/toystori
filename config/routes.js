@@ -44,13 +44,6 @@ module.exports = function (app, passport) {
 
   app.param('id', toys.load)
 
-  // city routes
-  var cities = require('../app/controllers/cities')
-  app.get('/cities/search/:query', cities.search)
-
-  app.param('cityId', cities.load)
-  app.param('query', cities.find)
-
   app.get('/about', function (req, res) {
     res.render('about')
   })

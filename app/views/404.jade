@@ -2,13 +2,10 @@ extends layouts/default
 
 block content
   .jumbotron
-    h2 Oops! Can't seem to find that page
-    p.text-error
-      strong 404
-    #error-message-box
-      #error-stack-trace
-        pre
-          code!= error
+    .align-center.vspace-five
+      h2 Page doesn't exist (404)
+      br
+      span The page you are looking for no longer exists.
 
 block extra_js
   script.
