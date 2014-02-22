@@ -3,18 +3,17 @@ extends ../layouts/default
 block main
   include ../includes/marketing
 
-  .visible-md.visible-lg.hidden-xs.hidden-sm
-    .container
-      -for toy in toys
-        .col-md-4.col-lg-4
-          .thumbnail
-            img(src="#{toy.image.cdnUri}", alt="Toy image")
-            .caption
-              h3
-                a(href="/toys/#{toy.id}")= toy.title
-              p !{toy.description}
-              p.text-success
-                | Age group: #{toy.agegroup}
+  .container
+    -for toy in toys
+      .col-md-4.col-xs-12.col-sm-6
+        .thumbnail
+          img(src="#{toy.image.cdnUri}", alt="Toy image")
+          .caption
+            h3
+              a(href="/toys/#{toy.id}")= toy.title
+            p !{toy.description}
+            p.text-success
+              | Age group: #{toy.agegroup}
 
 block extra_js
   script.
