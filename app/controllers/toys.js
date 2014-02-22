@@ -140,6 +140,27 @@ exports.update = function(req, res){
 }
 
 /**
+ * Show
+ */
+
+exports.show = function(req, res, next){
+  var allowEdit = false
+    , toy = req.toy
+    , user = req.user
+
+  if (user && user.id && (toy.user.id == toy.id)) {
+    allowEdit = true
+  }
+
+  toy.description = markdown.toHTML(toy.description)
+  res.render('toys/show', {
+    title: req.toy.title,
+    toy: req.toy,
+    allowEdit: allowEdit
+  })
+}
+
+/**
  * Delete the toy
  */
 

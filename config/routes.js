@@ -34,9 +34,9 @@ module.exports = function (app, passport) {
   app.param('userId', users.user)
 
   app.get('/', toys.index)
-  app.get('/toys/by-city/:cityId', toys.byCity)
   app.get('/toys/new', auth.requiresLogin, toys.new)
   app.post('/toys/new', auth.requiresLogin, toys.create)
+  app.get('/toys/:id', toyAuth, toys.show)
   app.put('/toys/:id', toyAuth, toys.update)
   app.del('/toys/:id', toyAuth, toys.destroy)
 

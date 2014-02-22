@@ -3,42 +3,34 @@ extends ../layouts/default
 block content
   .container.white-bg
     h2= toy.title
-    .visible-xs
-      p !{toy.description}
-      p.vspace-two
-        a.btn.btn-primary(href="/toys/#{toy.id}/interested") I'm interested
-    .hidden-xs
-      .meta.muted
-        - if (toy.user)
-          - var name = toy.user.name ? toy.user.name : toy.user.username
-          p.no-margin
-            | Created by &nbsp;
-            a(href="/users/"+toy.user._id)= name
-            | &nbsp;on&nbsp;
-            = formatDate(toy.createdAt)
-      hr
-      .col-sm-6.col-md-6.col-lg-6
-        p !{toy.description}
-        p.vspace-two
-          a.btn.btn-primary.disabled(href="/toys/#{toy.id}/interested") I'm interested
-        - if (allowEdit)
-          form.center.form-inline.confirm(action="/toys/"+toy.id, method="post")
-            input(type='hidden', name='_csrf', value="#{csrf_token}")
-            a.btn.btn-success(href='/toys/'+toy._id+'/edit', title="edit") Edit
-            &nbsp;&nbsp;
-            input(type="hidden", name="_method", value="DELETE")
-            button.btn.btn-danger(type="submit") delete
-      .col-sm-6.col-md-6.col-lg-6
-        p.text-danger
-          strong The toy is available at this location
-        #map-canvas
-      .vspace-four
+    p !{toy.description}
+    p.vspace.two
+      | Age group: #{toy.agegroup}, Distance: #{toy.distance} Kms.
+    p.text-muted
+      - if (toy.user)
+      - var name = toy.user.name ? toy.user.name : toy.user.username
+      | Created by &nbsp;
+      a(href="/users/"+toy.user._id)= name
+      | &nbsp;on&nbsp;
+      = formatDate(toy.createdAt)
+    #map-canvas.vspace-two.hidden-xs
+    - if (allowEdit)
+      form.center.form-inline.confirm(action="/toys/"+toy.id, method="post")
+      input(type='hidden', name='_csrf', value="#{csrf_token}")
+      a.btn.btn-success(href='/toys/'+toy._id+'/edit', title="edit") Edit
+      | &nbsp;&nbsp;
+      input(type="hidden", name="_method", value="DELETE")
+      button.btn.btn-danger(type="submit") delete
+    - else
+      .vspace-two
+        a.btn.btn-primary.btn-lg(href="/toys/#{toy.id}/interested") I'm interested
+    .vspace-two
 
 block extra_js
   script.
     mixpanel.track('Show toy listing page')
     var address = {
-      latitude: #{toy.latitude},
-      longitude: #{toy.longitude},
+      latitude: #{toy.loc.coordinates[1]},
+      longitude: #{toy.loc.coordinates[0]}
     }
     showMap(address)
