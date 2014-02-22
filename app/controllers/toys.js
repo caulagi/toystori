@@ -14,25 +14,6 @@ var mongoose = require('mongoose')
   , markdown = require( "markdown" ).markdown
   , _ = require('underscore')
 
-// https://gist.github.com/qiao/1626318
-function getClientIp(req) {
-  var ipAddress;
-  var forwardedIpsStr = req.header('x-forwarded-for'); 
-  if (forwardedIpsStr) {
-    var forwardedIps = forwardedIpsStr.split(',');
-    ipAddress = forwardedIps[0];
-  }
-  if (!ipAddress) {
-    ipAddress = req.connection.remoteAddress;
-  }
-
-  return ipAddress
-}
-
-/**
- * Load
- */
-
 exports.load = function(req, res, next, id){
   Toy.load(id, function (err, toy) {
     if (err) return next(err)
