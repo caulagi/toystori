@@ -5,10 +5,16 @@ var mongoose = require('mongoose')
   , imagerConfig = require(config.root + '/config/imager.js')
   , Schema = mongoose.Schema
 
+var radToKilometers = function (rad) {
+  return rad/6371
+}
+
 var ToySchema = new Schema({
   title: {type : String},
   description: {type : String},
+  address: {type : String},
   user: {type : Schema.ObjectId, ref : 'User'},
+  agegroup: {type: String},
   loc: {
     type: { type: String }, 
     coordinates: []
@@ -24,6 +30,9 @@ var ToySchema = new Schema({
   createdAt: {type : Date, default : Date.now}
 })
 
+ToySchema.index({ loc : '2dsphere' });
+
+
 ToySchema.path('title').validate(function (title) {
   return title.length > 0
 }, 'Title cannot be blank')
@@ -31,6 +40,14 @@ ToySchema.path('title').validate(function (title) {
 ToySchema.path('description').validate(function (description) {
   return description && description.length > 0
 }, 'Description cannot be blank')
+
+ToySchema.path('address').validate(function (address) {
+  return address && address.length > 0
+}, 'Address cannot be blank')
+
+ToySchema.path('agegroup').validate(function (agegroup) {
+  return agegroup && agegroup.length > 0
+}, 'Age group cannot be blank')
 
 
 ToySchema.pre('remove', function (next) {
@@ -49,6 +66,7 @@ ToySchema.methods = {
 
   uploadAndSave: function (images, cb) {
     console.log(images)
+    return this.save(cb)
     if (!images || !images.length) return this.save(cb)
 
     var imager = new Imager(imagerConfig, 'S3')

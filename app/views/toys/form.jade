@@ -21,13 +21,13 @@ block content
         .form-group
           label.control-label.col-lg-2(for='title') Title
           .col-lg-6
-            input#title.form-control(type='text', name="title", value=toy.title)
+            input.form-control(type='text', name="title", value=toy.title)
             span.help-block Elevator pitch for the toy
 
         .form-group
           label.control-label.col-lg-2(for='description') Description
           .col-lg-6
-            textarea#description.form-control(rows="4", name="description")= toy.description
+            textarea.form-control(rows="4", name="description")= toy.description
             span.help-block Describe the toy a bit.  You can use &nbsp;
               a(href="http://daringfireball.net/projects/markdown/", target="_blank") markdown.
 
@@ -38,28 +38,62 @@ block content
             span.help-block Upload a photo of how it looks
 
         .form-group
-          label.control-label.col-lg-2(for='latitude') Latitude
+          label.control-label.col-lg-2(for='address') Address
           .col-lg-6
-            input#title.form-control(type='text', name="latitude", value=toy.latitude)
-            span.help-block Latitude of location from where they can pick up the toy.  Find
-              a(href='http://www.latlong.net/', target='_blank') &nbsp;here
+            input.form-control(type="text", name="address", value=toy.address)
+            span.help-block The address is not shown to anybody.  It is only
+              | used to calculate distances
+            div.help-block#address-decode-success.hide
+              span.glyphicon.glyphicon-ok-circle.text-success &nbsp;
+              span.info 
+            div.help-block#address-decode-failure.hide
+              span.glyphicon.glyphicon-exclamation-sign.text-danger &nbsp;
+              | Unable to find address details on map
 
         .form-group
-          label.control-label.col-lg-2(for='longitude') Longitude
+          label.control-label.col-lg-2(for='agegroup') Age group
           .col-lg-6
-            input#title.form-control(type='text', name="longitude", value=toy.longitude)
-            span.help-block Longitude of location from where they can pick up the toy.  Find
-              a(href='http://www.latlong.net/', target='_blank') &nbsp;here
+            input.form-control(name="agegroup", value=toy.agegroup, 
+              placeholder="ex: 6 months to 2 years")
 
         .form-group
           .col-lg-offset-2.col-lg-10
-            button.btn.btn-primary(type='submit') Save changes
-            &nbsp;
-            a.btn(href='/toys', title="cancel") Cancel
-        .vspace-two
+            button.btn.btn-primary(type='submit')
+              span.glyphicon.glyphicon-save
+              | &nbsp;Save changes
+            | &nbsp;
+            a.btn.btn-default(href='/toys', title="cancel")
+              span.glyphicon.glyphicon-remove-circle
+              | &nbsp; Cancel
 
   .vspace-three
 
 block extra_js
   script.
     mixpanel.track('Toy edit page')
+  script.
+    var geocoder = new google.maps.Geocoder()
+    $("form input[name='address']").blur(function() {
+      geocoder.geocode({'address': $(this).val()}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          var lat = $("<input>")
+                      .attr("type", "hidden")
+                      .attr("name", "latitude")
+                      .val(results[0].geometry.location['d'])
+          var lon = $("<input>")
+                      .attr("type", "hidden")
+                      .attr("name", "longitude")
+                      .val(results[0].geometry.location['e'])
+          $("form")
+            .append($(lat))
+            .append($(lon))
+          $("#address-decode-success .info").text(results[0].formatted_address)
+          $("#address-decode-success").removeClass("hide")
+          $("#address-decode-failure").addClass("hide")
+        } else {
+          $("#address-decode-failure .info").text(status)
+          $("#address-decode-failure").removeClass("hide")
+          $("#address-decode-success").addClass("hide")
+        }
+      })
+    })

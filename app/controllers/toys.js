@@ -85,62 +85,24 @@ exports.new = function(req, res){
  */
 
 exports.create = function (req, res, next) {
-  var url = util.format(config.reverse_geocode, req.body.latitude, req.body.longitude)
-    , options = {}
-    , cityInformation
-    , city
-    , state
+  console.log(req.body)
+  var toy = new Toy(req.body)
+  toy.user = req.user
+  toy.loc = { type: 'Point', coordinates: [
+    parseFloat(req.body.longitude), parseFloat(req.body.latitude)
+  ]}
 
-  request(url, function(err, response, body) {
-    if (err || response.statusCode != 200) {
-      console.log(err, response.statusCode)
-      return res.render('toys/new', {
-        title: 'New Toy',
-        toy: new Toy(req.body),
-        errors: ["Unable to retrieve city information at the moment.  Please try again after some time"]
-      })
+  toy.save(function (err, doc, count) {
+    console.log(err)
+    if (!err) {
+      req.flash('success', 'Successfully created toy!')
+      return res.redirect('/toys/'+doc._id)
     }
-    cityInformation = JSON.parse(body)['results'][0]['address_components']
 
-    _.each(cityInformation, function(item, index) {
-      if (item.types[0] && item.types[0] === "locality") {
-        city = item.long_name
-      } else if (item.types[0] && item.types[0] === "administrative_area_level_1") {
-        state = item.long_name
-      }
-    })
-
-    options.criteria = {name: city, state: state}
-    City.list(options, function (err, cities) {
-      if (err) return next(err)
-
-      City.count().exec(function (err, count) {
-        if ( !cities.length ) {
-          return res.render('toys/new', {
-            title: 'New Toy',
-            toy: new Toy(req.body),
-            errors: ["Unable to find city with that name"]
-          })
-        }
-        
-        // something weird.  We need to set the city before
-        // doing new Toy
-        req.body.city = cities[0].id
-        var toy = new Toy(req.body)
-        toy.user = req.user
-        toy.uploadAndSave(req.files.image, function (err, doc, count) {
-          if (!err) {
-            req.flash('success', 'Successfully created toy!')
-            return res.redirect('/toys/'+doc._id)
-          }
-
-          return res.render('toys/new', {
-            title: 'New Toy',
-            toy: toy,
-            errors: errors.format(err.errors || err)
-          })
-        })
-      })
+    return res.render('toys/new', {
+      title: 'New Toy',
+      toy: toy,
+      errors: errors.format(err.errors || err)
     })
   })
 }
@@ -174,67 +136,6 @@ exports.update = function(req, res){
       toy: toy,
       errors: errors.format(err.errors || err)
     })
-  })
-}
-
-/**
- * Show
- */
-
-exports.show = function(req, res, next){
-  var allowEdit = false
-    , showAttending = true
-    , toy = req.toy
-    , user = req.user
-
-  if (user && user.id && (toy.user.id == user.id)) {
-    allowEdit = true
-  }
-
-  toy.interest.forEach(function (attendee, index) {
-    if (user && user.id && (user.id === attendee.user.id)) {
-      showAttending = false
-    }
-  })
-
-  toy.description = markdown.toHTML(toy.description)
-  _.each(toy.comments, function(comment, index) {
-    toy.comments[index].body = markdown.toHTML(comment.body)
-  })
-
-  res.render('toys/show', {
-    title: req.toy.title,
-    toy: req.toy,
-    allowEdit: allowEdit,
-    showAttending: showAttending
-  })
-}
-
-/**
- * Attending
- */
-
-exports.attending = function(req, res) {
-  var includeUser = true
-    , toy = req.toy
-  
-  toy.attending.forEach(function (user, index) {
-    if (req.user.id == user.id) {
-      includeUser = false
-    }
-  })
-
-  if (!includeUser) {
-    req.flash('error', 'Nothing to do!  You are already attending')
-    res.redirect('/toys/'+toy.id)
-  }
-
-  toy.attending.push({
-    user: req.user
-  })
-  toy.save(function (err, doc, count) {
-    req.flash('info', 'Marked as attending!')
-    res.redirect('/toys/'+toy.id)
   })
 }
 

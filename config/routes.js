@@ -37,8 +37,6 @@ module.exports = function (app, passport) {
   app.get('/toys/by-city/:cityId', toys.byCity)
   app.get('/toys/new', auth.requiresLogin, toys.new)
   app.post('/toys/new', auth.requiresLogin, toys.create)
-  app.get('/toys/:id', toys.show)
-  app.put('/toys/:id/attending', auth.requiresLogin, toys.attending)
   app.put('/toys/:id', toyAuth, toys.update)
   app.del('/toys/:id', toyAuth, toys.destroy)
 

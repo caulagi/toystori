@@ -14,7 +14,7 @@ block main
                 a(href="/toys/#{toy.id}")= toy.title
               p= toy.description
               p.text-success
-                strong Suitable for 1-2 years, JP Nagar
+                | Age group: #{toy.agegroup}
 
 block extra_js
   script.
