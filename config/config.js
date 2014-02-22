@@ -13,11 +13,6 @@ var _base = {
     clientSecret: "e1826c9857a0e58adb2a608ed516c1ad",
     callbackURL: "http://localhost:3000/auth/facebook/callback"
   },
-  aws: {
-    accessKeyId: process.env.AWS_S3_KEY,
-    secretAccessKey: process.env.AWS_S3_SECRET,
-    region: 'us-east-1'
-  },
   fallbackLatitude: 12.972558,
   fallbackLongitude: 77.594911,
   fallbackCity: "Bangalore",
