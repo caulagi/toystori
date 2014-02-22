@@ -88,7 +88,7 @@ exports.create = function (req, res, next) {
     parseFloat(req.body.longitude), parseFloat(req.body.latitude)
   ]}
 
-  toy.save(function (err, doc, count) {
+  toy.uploadAndSave(req.files.image, function (err, doc, count) {
     console.log(err)
     if (!err) {
       req.flash('success', 'Successfully created toy!')

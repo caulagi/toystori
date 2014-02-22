@@ -66,7 +66,6 @@ ToySchema.methods = {
 
   uploadAndSave: function (images, cb) {
     console.log(images)
-    return this.save(cb)
     if (!images || !images.length) return this.save(cb)
 
     var imager = new Imager(imagerConfig, 'S3')

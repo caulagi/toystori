@@ -3,7 +3,10 @@ extends ../layouts/default
 block content
   .container.white-bg
     h2= toy.title
-    p !{toy.description}
+    .row
+      .col-md-6.col-sm-12 !{toy.description}
+      .col-md-6.col-sm-12
+        img.img-responsive(src="#{toy.image.cdnUri}/detail_#{toy.image.files[0]}")
     p.vspace.two
       | Age group: #{toy.agegroup}, Distance: #{toy.distance} Kms.
     p.text-muted
