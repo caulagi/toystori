@@ -1,19 +1,13 @@
 body {
   background: url('/static/img/bg.png') repeat;
-  font-family: 'Rokkitt', serif;
+  font-family: 'Cabin', sans-serif;
   font-size: 15px;
   letter-spacing: 1px;
 }
 
-.navbar,
-.jumbotron .intro-title,
-.footer .copyright {
-  font-family: 'Ubuntu', sans-serif;
-}
-
-.slant,
-.footer {
-  font-family: 'Quintessential', cursive;
+.slant {
+  font-family: 'Lobster', cursive;
+  letter-spacing: 1px;
 }
 
 .navbar {
@@ -43,9 +37,6 @@ body {
 
 .navbar-subheading {
   margin-left: 30px;
-  color: #f90;
-  font-weight: bolder;
-  letter-spacing: 2px;
 }
 
 .jumbotron,
@@ -88,7 +79,7 @@ body {
 .red { color: #c33; }
 .blue { color: #6cc; }
 .green { color: #9c0; }
-.orange { color: #d35400; }
+.orange { color: #f39c12; }
 .purple { color: #8e44ad; }
 
 .align-center {
