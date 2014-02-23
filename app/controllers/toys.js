@@ -40,7 +40,7 @@ exports.renderToys= function(req, res, results) {
   })
 
   return res.render('toys/index', {
-    title: 'Events around you',
+    title: 'Share your toys',
     toys: toys,
     coords: req.session['loc'].coordinates
   })
