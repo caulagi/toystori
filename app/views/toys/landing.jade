@@ -22,16 +22,17 @@ block extra_js
     mixpanel.track('Landing page (redirect)')
 
   script.
+    function success(p) {
+      window.location = "/toys/by-location/?lat="+p.coords.latitude+"&lon="+p.coords.longitude;
+    };
+
+    function failure() {
+      window.location = "/toys/no-coords/";
+    };
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(success, failure, {
-        enableHighAccuracy: false
-      })
-    }
-
-    function success(p) {
-      window.location = "/toys/by-location/?lat="+p.coords.latitude+"&lon="+p.coords.longitude
-    }
-
-    function failure(p) {
-      console.log(p)
-    }
+        enableHighAccuracy: false,
+        timeout: 5000
+      });
+    };

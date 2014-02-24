@@ -9,6 +9,8 @@ var mongoose = require('mongoose')
   , Toy = mongoose.model('Toy')
   , errors = require('../../lib/errors')
   , markdown = require( "markdown" ).markdown
+  , request = require("request")
+  , util = require("util")
   , _ = require('underscore')
 
 exports.load = function(req, res, next, id){
@@ -46,12 +48,52 @@ exports.renderToys= function(req, res, results) {
   })
 }
 
+// https://gist.github.com/qiao/1626318
+function getClientIp(req) {
+  var ipAddress;
+  var forwardedIpsStr = req.header('x-forwarded-for'); 
+  if (forwardedIpsStr) {
+    var forwardedIps = forwardedIpsStr.split(',');
+    ipAddress = forwardedIps[0];
+  }
+  if (!ipAddress) {
+    ipAddress = req.connection.remoteAddress;
+  }
+
+  return ipAddress
+}
+
+exports.findLocationByIp = function(req, res, next) {
+  var ip = getClientIp(req)
+    , url = util.format("http://freegeoip.net/json/%s", ip)
+
+  console.log("Getting details for: ", url)
+  request(url, function(err, response, body) {
+    console.log(body)
+    if (err || response.statusCode != 200) {
+      return res.redirect("/toys/empty")
+    }
+
+    var freegeo = JSON.parse(body)
+      , coords = { type: 'Point', coordinates: [
+        parseFloat(freegeo.longitude), parseFloat(freegeo.latitude)
+      ]}
+  
+    req.session['loc'] = coords
+    return res.redirect("/toys/by-location")
+  })
+}
+
 exports.byLocation = function(req, res, next){
 
-  var coords = { type: 'Point', coordinates: [
-    parseFloat(req.query.lon), parseFloat(req.query.lat)
-  ]}
-  req.session['loc'] = coords
+  var coords
+
+  if (req.query.lon) {
+    coords = { type: 'Point', coordinates: [parseFloat(req.query.lon), parseFloat(req.query.lat)]}
+    req.session['loc'] = coords
+  } else {
+    coords = req.session['loc']
+  }
   console.log(coords)
 
   var options = Toy.searchOptions()
