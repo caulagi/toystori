@@ -1,0 +1,34 @@
+extends ../layouts/default
+include ../includes/mixins
+
+block main
+  include ../includes/marketing
+
+  .container#loc-human.hide
+    strong.pull-right Showing toys around &nbsp;
+      span.cursive.purple.info
+
+  .container
+    .row.white-bg
+      .vspace-two
+      .align-center
+        strong There are no toys near you yet.
+          | Be the first to &nbsp;
+          a(href="/toys/new") share
+      .vspace-two
+
+block extra_js
+  script.
+      mixpanel.track('Toy listing (index)')
+  script.
+    var geocoder = new google.maps.Geocoder()
+      , latlng = new google.maps.LatLng(#{coords[1]}, #{coords[0]})
+
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        if (results[0]) {
+          $("#loc-human .info").text(results[1].formatted_address);
+          $("#loc-human").removeClass("hide");
+        }
+      }
+    })
