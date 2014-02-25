@@ -30,7 +30,9 @@ exports.session = function (req, res) {
 
 exports.profile = function (req, res) {
   var user = req.profile
-  Toy.list({user: user}, function(err, toys) {
+    , options = {criteria: {user: user._id}}
+
+  Toy.list(options, function(err, toys) {
     if (err) return renderProfile(res, {user: user})
 
     Toy.count().exec(function (err, count) {
