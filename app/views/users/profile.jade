@@ -1,9 +1,18 @@
 extends ../layouts/default
 
 block content
-  .jumbotron.align-center
-    h2 #{user.name}
-    p.vspace-two We will be back with something interesting in a bit.
+  .jumbotron
+    .container
+      .row
+        .col-md-4 
+          .pull-right
+            img.img-response.thumbnail(src="//graph.facebook.com/#{user.facebook.id}/picture?width=200&height=200", alt="FB profile picture")
+        .col-md-offset-1.col-md-7
+          h2 #{user.name}
+          - if (user.facebook.bio)
+            p=user.facebook.bio
+          - if (user.facebook.location)
+            p=user.facebook.location.name
 
 block extra_js
   script.
