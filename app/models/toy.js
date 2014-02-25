@@ -94,9 +94,6 @@ ToySchema.statics = {
   load: function (id, cb) {
     this.findOne({ _id : id })
       .populate('user', 'name email username')
-      .populate('interest.user')
-      .populate('city')
-      .populate('city.country', 'name')
       .exec(cb)
   },
 

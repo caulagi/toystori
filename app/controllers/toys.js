@@ -107,6 +107,12 @@ exports.byLocation = function(req, res, next){
   })
 }
 
+exports.empty = function(req, res){
+  res.render('toys/empty', {
+    title: 'No toys found',
+  })
+}
+
 /**
  * New toy
  */
