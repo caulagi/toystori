@@ -13,6 +13,13 @@ block content
             p=user.facebook.location.name
           - if (user.facebook.bio)
             div=user.facebook.bio
+          - if (toys.length)
+            h4.vspace-four Toys shared by #{user.facebook.first_name}
+            ul.
+            - for (var i = 0; i < toys.length; i=i+1)
+              li
+                a(href="/toys/#{toys[i]._id}") #{toys[i].title}
+              
 
 block extra_js
   script.
