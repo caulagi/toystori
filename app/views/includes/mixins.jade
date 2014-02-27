@@ -1,3 +1,20 @@
+mixin renderToys(toys)
+  - for (var i = toys.length-1; i > 1; i=i-3)
+    +renderRow(toys[i], toys[i-1], toys[i-2])
+  - if (i == 1)
+    .row.vspace-two
+      +renderOne(toys[1])
+      +renderOne(toys[0])
+  - else
+    .row.vspace-two
+      +renderOne(toys[0])
+
+mixin renderRow(first, second, third)
+  .row.vspace-two
+    +renderOne(first)
+    +renderOne(second)
+    +renderOne(third)
+
 mixin renderOne(toy)
   .col-md-4
     .listing
@@ -8,20 +25,3 @@ mixin renderOne(toy)
       p !{toy.description}
       p.text-success
         | Age group: #{toy.agegroup}
-
-mixin renderRow(first, second, third)
-  .row.vspace-two
-    +renderOne(first)
-    +renderOne(second)
-    +renderOne(third)
-
-mixin renderToys(toys)
-  - var i = toys.length
-  - for (; i > 2; i=i-3)
-    +renderRow(toys[i], toys[i-1], toys[i-2])
-  - if (i == 2)
-    .row.vspace-two
-      +renderOne(toys[i-2])
-      +renderOne(toys[i-1])
-  - else
-      +renderOne(toys[i-1])

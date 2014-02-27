@@ -41,24 +41,11 @@ exports.profile = function (req, res) {
   })
 }
 
-exports.askEmail = function (req, res) {
-  res.render('users/email', {
-    user: reg.profile
-  })
-}
-
-exports.updateEmail = function (req, res) {
-  var user = reg.profile;
-  res.render('users/reg_complete', {
-    user: reg.profile
-  })
-}
-
 /**
  * Find user by id
  */
 
-exports.user = function (req, res, next, id) {
+exports.load = function (req, res, next, id) {
   User
     .findOne({ _id : id })
     .exec(function (err, user) {

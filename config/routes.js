@@ -1,16 +1,6 @@
-
-/*!
- * Module dependencies.
- */
-
-var async = require('async')
-
-/**
- * Controllers
- */
-
 var users = require('../app/controllers/users')
   , toys = require('../app/controllers/toys')
+  , emails = require("../app/controllers/emails")
   , auth = require('./middlewares/authorization')
 
 var toyAuth = [auth.requiresLogin, auth.toy.hasAuthorization]
@@ -31,9 +21,10 @@ module.exports = function (app, passport) {
       failureRedirect: '/login'
     }), users.authCallback)
 
-  app.param('userId', users.user)
+  app.param('userId', users.load)
 
   app.get('/', toys.index)
+  app.param('id', toys.load)
   app.get('/toys/by-location', toys.byLocation)
   app.get('/toys/no-coords', toys.findLocationByIp)
   app.get('/toys/empty', toys.empty)
@@ -43,7 +34,12 @@ module.exports = function (app, passport) {
   app.put('/toys/:id', toyAuth, toys.update)
   app.del('/toys/:id', toyAuth, toys.destroy)
 
-  app.param('id', toys.load)
+
+  // Email confirmation
+  app.get('/emails/resend-code', emails.resendCode)
+  app.get('/emails/verify/:code', emails.verifyCode)
+  app.get('/emails/update', emails.askEmail)
+  app.post('/emails/update', auth.requiresLogin, users.load, emails.update)
 
   app.get('/about', function (req, res) {
     res.render('about')

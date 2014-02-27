@@ -1,7 +1,10 @@
 extends ../layouts/default
 include ../includes/mixins
 
-block main
+block messages
+  include ../emails/remind
+
+block content
   include ../includes/marketing
 
   .container#loc-human.hide

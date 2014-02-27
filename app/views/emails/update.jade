@@ -1,0 +1,21 @@
+extends ../layouts/default
+
+block content
+  
+  .jumbotron.align-center
+    -if (req.user)
+      p.lead Update your email
+      hr
+      form.form-inline.vspace-two(method="post", action="/emails/update")
+        input(type="hidden", name="_csrf", value="#{csrf_token}")
+        .form-group
+          label.sr-only(for="email") Email
+          input.form-control(type="text", name="email", id="email")
+        button.btn.btn-primary(type="submit") Submit
+    -else
+      .vspace-two.align.text-danger You need to be logged in to complete the action
+    
+
+block extra_js
+  script.
+    mixpanel.track('Update email')

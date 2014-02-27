@@ -4,7 +4,8 @@ html(lang='en')
   body
     include ../includes/header
     block main
-    include ../includes/messages
+    block messages
+      include ../includes/messages
     block content
     include ../includes/footer
     include ../includes/foot

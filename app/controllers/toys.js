@@ -28,7 +28,7 @@ exports.index = function(req, res) {
   })
 }
 
-exports.renderToys= function(req, res, results) {
+exports.renderToys = function(req, res, results) {
   var toys = []
 
   _.each(results, function(result, index) {

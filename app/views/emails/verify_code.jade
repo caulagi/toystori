@@ -1,0 +1,15 @@
+extends ../layouts/default
+
+block content
+  .jumbotron.align-center
+    -if (verified)
+      .text-success.vspace-two
+        | Congratulations!  You have verified your email as
+        | #{user.email}
+    -else
+      .text-danger.vspace-two
+        | This is not a valid code. &nbsp;
+        strong
+          a(href="/emails/resend-code") Click here
+        | &nbsp; for us to send confirmation mail again.
+

@@ -1,5 +1,8 @@
 extends ../layouts/default
 
+block messages
+  include ../emails/remind
+
 block content
   .container.white-bg
     h2= toy.title

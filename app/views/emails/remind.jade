@@ -1,0 +1,8 @@
+- if (req.user && !req.user.verified)
+  .alert.alert-danger.align-center
+    .vspace-one
+      | You have not verified your email.  Please verify your
+      | email. &nbsp;
+      strong
+        a(href="/emails/resend-code") Click here
+      | &nbsp; for us to send confirmation mail again.

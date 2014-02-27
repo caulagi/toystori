@@ -31,7 +31,7 @@
   "dependencies": {
     "express": "latest",
     "jade": "latest",
-    "mongoose": "3.8.7",
+    "mongoose": "latest",
     "connect-mongo": "latest",
     "connect-flash": "latest",
     "passport": "latest",
@@ -41,6 +41,8 @@
     "view-helpers": "latest",
     "async": "latest",
     "request": "latest",
+    "postmark": "latest",
+    "node-uuid": "latest",
     "markdown": "latest"
   },
   "devDependencies": {
