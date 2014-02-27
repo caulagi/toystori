@@ -58,14 +58,13 @@ body {
 }
 
 .footer .container {
-  font-weight: bold;
   background: rgb(204, 221, 85);
   background: rgb(204, 221, 85, 0.2);
   background-color: #cd5;
 }
 
 .footer .copyright {
-  font-size: 1.3em;
+  font-size: 1.2em;
 }
 
 .vspace-one { margin-top: 1em; }
