@@ -5,6 +5,7 @@ var mongoose = require('mongoose')
   , errors = require('../../lib/errors')
   , User = mongoose.model("User")
   , postmark = require("postmark")(process.env.POSTMARK_API_KEY)
+  , jade = require("jade")
 
 /**
  * Send an email confirmation code to the user and store
@@ -17,11 +18,16 @@ exports.resendCode = function(req, res, next) {
   code.save(function (err) {
     if (err) { return next(err) }
 
+    var body = jade.renderFile(config.root + "/app/views/emails/send_code_email.jade", {
+      title: "Confirm your email",
+      code: code.code
+    })
+
     postmark.send({
       "From": config.from_address,
       "To": req.user.email,
       "Subject": "Confirm your email",
-      "TextBody": "Please click this link to confirm your email - http://toystori.com/emails/verify/"+code.code,
+      "HtmlBody": body
     }, function(error, success) {
       if (error) {
         console.log(error)

@@ -1,0 +1,14 @@
+extends ../layouts/email.jade
+
+block content
+  p
+    | Please confirm your email that was registered
+    | with us by clicking the link below
+  table
+    tr
+      td.padding
+        p
+          a.btn-primary(href="http://www.toystori.com/emails/verify/#{code}") Confirm my email.
+  p.vspace-two
+    | Alternatively, you can also open http://www.toystori.com/emails/verify/#{code}
+    | in a browser.
