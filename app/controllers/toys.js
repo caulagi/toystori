@@ -134,7 +134,6 @@ exports.create = function (req, res, next) {
   ]}
 
   toy.uploadAndSave(req.files.image, function (err, doc, count) {
-    console.log(err)
     if (!err) {
       req.flash('success', 'Successfully created toy!')
       return res.redirect('/toys/'+doc._id)
