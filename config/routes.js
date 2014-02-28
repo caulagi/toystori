@@ -33,6 +33,7 @@ module.exports = function (app, passport) {
   app.get('/toys/:id', toys.show)
   app.put('/toys/:id', toyAuth, toys.update)
   app.del('/toys/:id', toyAuth, toys.destroy)
+  app.get('/toys/:id/interested', auth.requiresLogin, toys.load, toys.interested)
 
 
   // Email confirmation

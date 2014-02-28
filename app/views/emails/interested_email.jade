@@ -1,0 +1,11 @@
+extends ../layouts/email
+
+block content
+  - var name = user.name ? user.name : user.username
+  p Hello There!
+  p
+    a(href="http://www.toystori.com/users/#{user.id}") #{name}
+    | &nbsp;is interested in borrowing "#{toy.title}" you have posted.
+    | You can take further action by going to your &nbsp;
+    a(href="http://www.toystori.com/toys/#{toy.id}") toy page.
+  p.vspace-two Toystori team

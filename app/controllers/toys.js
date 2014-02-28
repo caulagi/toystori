@@ -1,8 +1,3 @@
-
-/**
- * Module dependencies.
- */
-
 var mongoose = require('mongoose')
   , env = process.env.NODE_ENV || 'development'
   , config = require('../../config/config')[env]
@@ -12,6 +7,8 @@ var mongoose = require('mongoose')
   , request = require("request")
   , util = require("util")
   , _ = require('underscore')
+  , postmark = require("postmark")(process.env.POSTMARK_API_KEY)
+  , jade = require("jade")
 
 exports.load = function(req, res, next, id){
   Toy.load(id, function (err, toy) {
@@ -131,7 +128,7 @@ exports.new = function(req, res){
 exports.create = function (req, res, next) {
   console.log(req.body)
   var toy = new Toy(req.body)
-  toy.user = req.user
+  toy.owner = req.user
   toy.loc = { type: 'Point', coordinates: [
     parseFloat(req.body.longitude), parseFloat(req.body.latitude)
   ]}
@@ -183,16 +180,12 @@ exports.update = function(req, res){
   })
 }
 
-/**
- * Show
- */
-
 exports.show = function(req, res, next){
   var allowEdit = false
     , toy = req.toy
     , user = req.user
 
-  if (user && user.id && (toy.user.id == toy.id)) {
+  if (user && user.id && (toy.owner.id == toy.id)) {
     allowEdit = true
   }
 
@@ -201,6 +194,56 @@ exports.show = function(req, res, next){
     title: req.toy.title,
     toy: req.toy,
     allowEdit: allowEdit
+  })
+}
+
+exports.interested = function(req, res, next) {
+  if (!req.user.verified) {
+    return res.render('toys/interested')
+  }
+
+  var duplicates = _.filter(req.toy.interested, function(val) {
+    return val.user.id === req.user.id
+  })
+
+  if (duplicates.length) {
+    return res.render('toys/interested', {
+      errors: errors.format({
+        error: {message: "DUPLICATE: You have already expressed your interest"} 
+      })
+    })
+  }
+
+  req.toy.addInterest(req.user, function(err, toy) {
+    if (err) {
+      return res.render('toys/interested', {
+        errors: errors.format(err.errors || err) 
+      })
+    }
+    var body = jade.renderFile(config.root + "/app/views/emails/interested_email.jade", {
+      title: "User expressed interest!",
+      user: req.user,
+      toy: req.toy
+    })
+
+    postmark.send({
+      "From": config.from_address,
+      "To": toy.owner.email,
+      "Subject": "[Toystori] User wants to borrow",
+      "HtmlBody": body
+    }, function(error, success) {
+      if (error) {
+        return res.render('toys/interested', {
+          errors: errors.format({error: error}) 
+        })
+      }
+      
+      return res.render('toys/interested', { 
+        title: "Interest expressed",
+        mail_sent: true,
+        toy: toy
+      })
+    })
   })
 }
 

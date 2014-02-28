@@ -1,0 +1,18 @@
+extends ../layouts/default
+
+block content
+  .jumbotron
+    -if (!req.user.verified)
+      include ../emails/remind
+    -if (errors.length)
+      .text-danger.vspace-two.align-center
+        | There was an error completing the action
+    -if (mail_sent)
+      .text-success.align-center
+        | Done! An email has been sent to 
+        | #{toy.owner.name} expressing your interest!
+      
+
+block extra_js
+  script.
+    mixpanel.track('Toy interested')

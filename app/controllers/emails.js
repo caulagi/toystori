@@ -32,7 +32,7 @@ exports.resendCode = function(req, res, next) {
       if (error) {
         console.log(error)
         return res.render("emails/resend_code", {
-          errors: errors.format(error)
+          errors: errors.format({error: error})
         })
       }
       res.render("emails/resend_code", {

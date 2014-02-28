@@ -6,9 +6,10 @@ block content
       .text-danger.vspace-two
         | You need to logged in to complete the action
     - else 
-      p
-        | An email has been sent to #{req.user.email}.  Please verify
-        | your email by clicking the link in it.
+      -if (!errors.length)
+        p
+          | An email has been sent to #{req.user.email}.  Please verify
+          | your email by clicking the link in it.
       .vspace-two
         a(href="/emails/update") Click here
         | &nbsp; to change your email.

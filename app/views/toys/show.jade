@@ -13,10 +13,10 @@ block content
     p.vspace.two
       | Age group: #{toy.agegroup}, Distance: #{toy.distance} Kms.
     p.text-muted
-      - if (toy.user)
-      - var name = toy.user.name ? toy.user.name : toy.user.username
+      - if (toy.owner)
+      - var name = toy.owner.name ? toy.owner.name : toy.owner.username
       | Created by &nbsp;
-      a(href="/users/"+toy.user._id)= name
+      a(href="/users/"+toy.owner._id)= name
       | &nbsp;on&nbsp;
       = formatDate(toy.createdAt)
     #map-canvas.vspace-two.hidden-xs

@@ -13,13 +13,13 @@ var ToySchema = new Schema({
   title: {type : String},
   description: {type : String},
   address: {type : String},
-  user: {type : Schema.ObjectId, ref : 'User'},
+  owner: {type : Schema.ObjectId, ref : 'User'},
   agegroup: {type: String},
   loc: {
     type: { type: String }, 
     coordinates: []
   },
-  interest: [{
+  interested: [{
     user: { type : Schema.ObjectId, ref : 'User' },
   }],
   image: {
@@ -82,18 +82,19 @@ ToySchema.methods = {
   },
 
   addInterest: function (user, cb) {
-    this.interest.push({
+    this.interested.push({
       user: user._id
     })
+    this.save(cb)
   }
-
 }
 
 ToySchema.statics = {
 
   load: function (id, cb) {
     this.findOne({ _id : id })
-      .populate('user', 'name email username')
+      .populate("owner", "name email username")
+      .populate("interested.user")
       .exec(cb)
   },
 
