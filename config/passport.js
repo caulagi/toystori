@@ -28,10 +28,9 @@ module.exports = function (passport, config) {
       User.findOne({ 'facebook.id': profile.id }, function (err, user) {
         if (err) { return done(err) }
         if (!user) {
-          var email = (profile.emails && profile.emails[0].value) || profile.username+'@invalid.com'
           user = new User({
             name: profile.displayName,
-            email: email,
+            email: profile.emails[0].value,
             username: profile.username,
             provider: 'facebook',
             facebook: profile._json
