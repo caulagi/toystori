@@ -30,7 +30,7 @@ exports.session = function (req, res) {
 
 exports.profile = function (req, res) {
   var user = req.profile
-    , options = {criteria: {user: user._id}}
+    , options = {criteria: {owner: user._id}}
 
   Toy.list(options, function(err, toys) {
     if (err) return renderProfile(res, {user: user})
