@@ -29,7 +29,7 @@ var development = _.extend({}, _base, { db: _base.db+'_dev' })
       facebook: {
         clientID: process.env.FACEBOOK_APP_ID,
         clientSecret: process.env.FACEBOOK_APP_SECRET,
-        callbackURL: "http://www.toystori.com/auth/facebook/callback"
+        callbackURL: "http://fathomless-forest-3647.herokuapp.com/auth/facebook/callback"
       },
       fallbackCityId: '51fd5227920fc2020000522c'
     })
