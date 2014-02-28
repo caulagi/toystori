@@ -15,7 +15,8 @@ module.exports = function (app, passport) {
   app.get('/login', users.login)
   app.get('/logout', users.logout)
   app.get('/users/:userId', users.profile)
-  app.get('/auth/facebook', passport.authenticate('facebook'))
+  app.get('/auth/facebook', passport.authenticate('facebook',
+    {scope: ['email', 'user_about_me', 'user_location', 'user_photos']}))
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
       failureRedirect: '/login'
