@@ -88,6 +88,26 @@ describe('Static pages', function () {
     })
   })
 
+  describe('GET /login', function () {
+    context("Viewing login page", function() {
+      it("should give 200", function(done) {
+        agent
+          .get("/login")
+          .expect(200)
+          .end(done)
+      })
+      it("should show facebook button", function(done) {
+        agent
+          .get("/login")
+          .end(function (err, res) {
+            res.should.be.html
+            res.text.should.match(/div class=\"vspace-two align-center\"><a href=\"\/auth\/facebook\" class=\"btn btn-auth btn-facebook large\">Login with Facebook<\/a><\/div>/)
+            done()
+          })
+      })
+    })
+  })
+
   describe('GET /', function () {
     context("Viewing landing page", function() {
       it("should give 200", function(done) {
