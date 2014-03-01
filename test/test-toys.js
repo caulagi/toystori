@@ -32,26 +32,6 @@ describe('Toys', function () {
     toy.save(done)
   })
 
-  describe('GET /', function () {
-    context("Viewing landing page", function() {
-      it("should work without login", function(done) {
-        agent
-          .get("/")
-          .expect(200)
-          .end(done)
-      })
-      it("should ask user to share location", function(done) {
-        agent
-          .get("/")
-          .end(function (err, res) {
-            res.should.be.html
-            res.text.should.match(/Please allow the website to use your location/)
-            done()
-          })
-      })
-    })
-  })
-
   describe('GET /toys/:id', function () {
     context("Viewing toy details", function() {
       it("should work without login", function(done) {
