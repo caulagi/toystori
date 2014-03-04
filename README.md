@@ -1,8 +1,8 @@
 # [toystori][2] - Share your toys
+[![Build Status](https://travis-ci.org/caulagi/toystori.png?branch=master)](https://travis-ci.org/caulagi/toystori)
 
 ![Toystori first look](http://farm8.staticflickr.com/7377/12921336544_5ff493b3e7_c.jpg)
 
-[![Build Status](https://travis-ci.org/caulagi/toystori.png?branch=master)](https://travis-ci.org/caulagi/toystori)
 
 toystori - A website for all the lovely mothers and children
 
