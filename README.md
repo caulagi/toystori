@@ -1,4 +1,6 @@
-# [toystori][1] - Share your toys
+# [toystori][2] - Share your toys
+
+![Toystori first look](http://farm8.staticflickr.com/7377/12921336544_5ff493b3e7_c.jpg)
 
 [![Build Status](https://travis-ci.org/caulagi/toystori.png?branch=master)](https://travis-ci.org/caulagi/toystori)
 
@@ -14,16 +16,14 @@ Built with love using Nodejs and Mongodb during Bangalore Hack
 
 ## Dev setup
 
-* Install mongodb
+* Install mongodb - [download](http://www.mongodb.org/downloads)
 
-* Load data about cities and countries
-
-        $ node data/loadCities.js
-
-* Install dependencies and start node
+* Install dependencies
 
         $ npm install
-        $ node_modules/.bin/nodemon server.js 
+
+* GO!
+        $ npm start
 
 ## Tests
     
@@ -36,5 +36,4 @@ Built with love using Nodejs and Mongodb during Bangalore Hack
 Licensed under [MIT][1]
 
 [1]: https://github.com/caulagi/toystori/blob/master/LICENSE
-[2]: https://github.com/caulagi/toystori/blob/master/CREDITS
-[3]: http://toystori.com
+[2]: http://www.toystori.com
