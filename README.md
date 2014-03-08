@@ -35,5 +35,5 @@ Yup!
 
 Licensed under [MIT][1]
 
-[1]: https://github.com/caulagi/toystori/blob/master/LICENSE
+[1]: https://github.com/caulagi/toystori/blob/master/LICENSE.mit
 [2]: http://www.toystori.com
