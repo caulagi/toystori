@@ -1,5 +1,6 @@
 # [toystori][2] - Share your toys
-[![Build Status](https://travis-ci.org/caulagi/toystori.png?branch=master)](https://travis-ci.org/caulagi/toystori)
+
+** THIS PROJECT IS NOT MAINTAINED ANYMORE **
 
 ![Toystori first look](http://farm8.staticflickr.com/7377/12921336544_5ff493b3e7_c.jpg)
 
