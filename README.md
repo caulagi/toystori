@@ -1,6 +1,6 @@
 # [toystori][2] - Share your toys
 
-**THIS PROJECT IS NOT MAINTAINED ANYMORE**
+**The project has been superceded by https://github.com/putanigalu/frontend**
 
 ![Toystori first look](http://farm8.staticflickr.com/7377/12921336544_5ff493b3e7_c.jpg)
 
